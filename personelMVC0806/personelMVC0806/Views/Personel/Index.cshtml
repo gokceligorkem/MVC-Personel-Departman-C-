@@ -1,0 +1,47 @@
+﻿@model List<personelMVC0806.Models.EntityFramework.Personel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<a class="btn btn-success" href="/Personel/Listele">Yeni Personel</a>
+
+<h2>Personel Listesi</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td>Ad</td>
+            <td>Soyad</td>
+            <td>Departman Adı</td>
+            <td>Maaş</td>
+            <td>Yaş</td>
+            <td>DoğumTarihi</td>
+            <td>Cinsiyet</td>
+            <td>Medeni Durum</td>
+            <td>Güncelle</td>
+            <td>Sil</td>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var personel in Model)
+        {
+            <tr>
+                <td>@personel.Ad</td>
+                <td>@personel.Soyad</td>
+                <td>@personel.Departman.Ad</td>
+                <td>@personel.Maaş</td>
+                <td>@(DateTime.Now.Year -personel.DogumTarihi.Year)</td>
+                <td>@personel.DogumTarihi.ToString("dd-MM-yyyy")</td>
+                <td>@(personel.Cinsiyet==true ? "Kadın" : "Erkek")</td>
+                <td>@(personel.MedeniDurumu== true ? "Evli" : "Bekar")</td>
+                <td>@Html.ActionLink("Guncelle", "Guncelle", new { id = personel.id }, new { @class = "btn btn-primary" })</td>
+                @*ilk gğncelle butonun ismi ikinci metodun ismi*@
+                <td>@Html.ActionLink("Sil", "Sil", new { id = personel.id }, new { @class = "btn btn-danger" })</td>
+                @*<td><a class="btn btn-primary" href="/Personel/Guncelle/@personel.id">Güncelle</a></td>
+        <td><a class="btn btn-danger" href="/Personel/Sil/@personel.id">Sil</a></td>*@
+            </tr>
+        }
+    </tbody>
+</table>

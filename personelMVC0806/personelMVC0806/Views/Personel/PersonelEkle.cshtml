@@ -1,0 +1,44 @@
+﻿@model personelMVC0806.ViewModels.PersonelFormViewModel
+@{
+    ViewBag.Title = "Yeni";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Listele</h2>
+
+@using (Html.BeginForm("Kaydet", "Personel", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Personel.Ad)
+        @Html.TextBoxFor(m => m.Personel.Ad, new { @class = "form-control" })
+
+        @Html.LabelFor(m => m.Personel.Soyad)
+        @Html.TextBoxFor(m => m.Personel.Soyad, new { @class = "form-control" })
+
+       <label>Departmanlar</label>
+        @Html.DropDownListFor(m => m.Personel.Departmanid, new SelectList(Model.Departmanlar, "id", "Ad"), "Departman Seçiniz", new { @class = "form-control" })
+
+        @Html.LabelFor(m => m.Personel.Maaş)
+        @Html.TextBoxFor(m => m.Personel.Maaş, new { @class = "form-control" })
+
+        @Html.LabelFor(m => m.Personel.DogumTarihi)
+        @Html.TextBoxFor(m => m.Personel.DogumTarihi, "{0:yyyy-MM-ddd}", new { @class = "form-control", type = "date" })
+    </div>
+    <div class="radio">
+        <label>
+            @Html.RadioButtonFor(m => m.Personel.Cinsiyet, true) Kadın
+        </label>
+        <label>
+            @Html.RadioButtonFor(m => m.Personel.Cinsiyet, false) Erkek
+        </label>
+    </div>
+    <div class="checkbox">
+        <label>
+            @Html.CheckBoxFor(m => m.Personel.MedeniDurumu) Evliyseniz Seçiniz...
+        </label>
+    </div>
+    <div>
+        @Html.HiddenFor(m => m.Personel.id)
+        <button type="submit" class="btn btn-success"> Kaydet </button>
+    </div>
+   
+}
